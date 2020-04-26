@@ -1,6 +1,6 @@
 extends Area2D
 
-signal hit
+signal hamham
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -16,6 +16,6 @@ func _ready():
 #	pass
 
 
-func _on_Tail_body_entered(body):
-	print("tail script hit")
-	emit_signal("hit")
+func _on_Food_area_entered(area):
+	queue_free()
+	emit_signal("hamham")

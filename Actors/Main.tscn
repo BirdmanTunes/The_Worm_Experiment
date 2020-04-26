@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Actors/Tail.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Actors/Main.gd" type="Script" id=2]
+[ext_resource path="res://Actors/Head.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Borders.png" type="Texture" id=4]
+[ext_resource path="res://Actors/Food.tscn" type="PackedScene" id=5]
+[ext_resource path="res://apple_crunch.wav" type="AudioStream" id=6]
+[ext_resource path="res://gameover.wav" type="AudioStream" id=7]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Borders.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [  ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "Borders.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+Tail = ExtResource( 1 )
+Food = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Head" parent="." instance=ExtResource( 3 )]
+position = Vector2( 16, 16 )
+gravity = 0.0
+
+[node name="AppleCrunch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="hit_head" from="Head" to="." method="_test"]

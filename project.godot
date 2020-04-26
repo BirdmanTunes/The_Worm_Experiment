@@ -16,13 +16,18 @@ _global_script_class_icons={
 [application]
 
 config/name="The Worm Experiment"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Actors/Hud.tscn"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=320
-window/size/height=320
+window/size/height=768
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="tail"
+2d_physics/layer_3="food"
 
 [rendering]
 
